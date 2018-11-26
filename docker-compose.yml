@@ -1,0 +1,72 @@
+version: '3'
+ 
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gitweb_app
+    environment:
+      - SYMFONY__APP__DB__DRIVER=${APP_DB_DRIVER}
+      - SYMFONY__APP__DB__HOST=${APP_DB_HOST}
+      - SYMFONY__APP__DB__PORT=${APP_DB_PORT}
+      - SYMFONY__APP__DB__NAME=${MYSQL_DATABASE}
+      - SYMFONY__APP__DB__USER=${MYSQL_USER}
+      - SYMFONY__APP__DB__PASSWORD=${MYSQL_PASSWORD}
+
+      - SYMFONY__APP__LOCALE=${APP_LOCALE}
+
+      - SYMFONY__APP__MAILER__TRANSPORT=${APP_MAILER_TRANSPORT}
+      - SYMFONY__APP__MAILER__HOST=${APP_MAILER_HOST}
+      - SYMFONY__APP__MAILER__USER=${APP_MAILER_USER}
+      - SYMFONY__APP__MAILER__PASSWORD=${APP_MAILER_PASSWORD}
+
+      - SYMFONY__APP__SECRET=${APP_SECRET}
+      - SYMFONY__APP__SECRET__KEY=${APP_SECRET_KEY}
+
+      - APP_ADMIN_USER
+      - APP_ADMIN_EMAIL
+      - APP_ADMIN_PASSWORD
+    depends_on:
+      - db
+    ports:
+      - 9000:8080 # nginx
+      - 9001:8090 # supervisor GUI
+    networks:
+      - overlay
+    logging:
+      driver: journald
+
+  db:
+    image: 'mariadb:10.3'
+    container_name: gitweb_db
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    volumes: 
+      - db_data:/var/lib/mysql/data
+    networks:
+      - overlay
+    logging:
+      driver: journald
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: gitweb_mailhog
+    environment:
+      - MH_SMTP_BIND_ADDR=0.0.0.0:1025
+    ports:
+      - 8025:8025
+    networks:
+      - overlay
+    logging:
+      driver: journald
+    privileged: true
+
+volumes:
+  db_data:
+
+networks:
+  overlay:

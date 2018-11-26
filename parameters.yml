@@ -1,0 +1,21 @@
+parameters:
+    database_driver: '%app.db.driver%'
+    database_host: '%app.db.host%'
+    database_port: '%app.db.port%'
+    database_name: '%app.db.name%'
+    database_user: '%app.db.user%'
+    database_password: '%app.db.password%'
+
+    mailer_transport: '%app.mailer.transport%'
+    mailer_host: '%app.mailer.host%'
+    mailer_user: '%app.mailer.user%'
+    mailer_password: '%app.mailer.password%'
+
+    locale: '%app.locale%'
+    secret: '%app.secret%'
+
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true
+    enable_registration: false
+    secret_key: '%app.secret.key%'
