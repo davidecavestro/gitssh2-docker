@@ -1,0 +1,2 @@
+# gitssh2-docker
+Docker image for http://www.gitssh2.com/
