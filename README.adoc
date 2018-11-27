@@ -1,2 +1,12 @@
-# gitssh2-docker
-Docker image for http://www.gitssh2.com/
+= gitssh2-docker
+An alpine based docker image for http://www.gitssh2.com/
+:toc:
+
+
+An alpine based docker image for gitssh2.
+
+== Usage
+See docker-compose.yml for example usage.
+
+== License
+MIT
