@@ -6,7 +6,8 @@ An alpine based docker image for http://www.gitssh2.com/
 An alpine based docker image for gitssh2.
 
 == Usage
-See docker-compose.yml for example usage.
+See `docker-compose.yml` for an example of supported parameters.
+It is equipped with a mariadb and a mailhog for easy bootstrapping.
 
 == License
 MIT
