@@ -5,14 +5,66 @@ An alpine based docker image for http://www.gitssh2.com/
 
 An alpine based docker image for gitssh2.
 
-== Usage
+
+== Get started
+
+Install https://docs.docker.com/compose/[docker compose] and run `docker-compose up`
+It will start the app, a mariadb instance and mailhog for you.
+You should see the app at http://localhost:8080 and mailhog 
+at http://localhost:8025.
+
+== Config
 
 Get the image from https://hub.docker.com/r/davidecavestro/gitssh2-docker/[davidecavestro/gitssh2]
 ```
 docker pull davidecavestro/gitssh2
 ```
 
+The configuration for db and email stuff can be passed with the following environment variables:
+
+pass:[SYMFONY__APP__DB__DRIVER]::
+db driver (i.e. pdo_mysql)
+pass:[SYMFONY__APP__DB__HOST]::
+db host
+pass:[SYMFONY__APP__DB__PORT]::
+db port
+pass:[SYMFONY__APP__DB__NAME]::
+database name
+pass:[SYMFONY__APP__DB__USER]::
+user for db connection
+pass:[SYMFONY__APP__DB__PASSWORD]::
+db user password
+pass:[SYMFONY__APP__LOCALE]::
+locale used by php
+pass:[SYMFONY__APP__MAILER__TRANSPORT]::
+protocol for outgoing emails (i.e. smtp)
+pass:[SYMFONY__APP__MAILER__HOST]::
+mail server host
+pass:[SYMFONY__APP__MAILER__USER]::
+user for outgoing email auth
+pass:[SYMFONY__APP__MAILER__PASSWORD]::
+password for outgoing email auth
+
+
+pass:[SYMFONY__APP__SECRET]::
+app secret
+pass:[SYMFONY__APP__SECRET__KEY]::
+app secret key
+
+APP_ADMIN_USER::
+application admin user to be automatically created
+APP_ADMIN_EMAIL::
+email for automatically created user
+APP_ADMIN_PASSWORD::
+password for automatically created user
+
+Please note most of the variables have double underscores and a 
+`SYMFONY__` prefix: it is due to limitations of the web framework used
+for the webapp (Symfony).
+
+
 == Build
+
 See https://github.com/davidecavestro/gitssh2-docker/blob/master/docker-compose.yml[docker-compose.yml] for an example of supported parameters.
 It is equipped with a mariadb and a mailhog for easy bootstrapping.
 

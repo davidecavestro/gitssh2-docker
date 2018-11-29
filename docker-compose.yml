@@ -2,10 +2,10 @@ version: '3'
  
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: gitweb_app
+    #build: # toggle build/image for local build vs pulling from hub 
+    #  context: .
+    #  dockerfile: Dockerfile
+    image: 'davidecavestro/gitssh2'
     environment:
       - SYMFONY__APP__DB__DRIVER=${APP_DB_DRIVER}
       - SYMFONY__APP__DB__HOST=${APP_DB_HOST}
@@ -30,8 +30,8 @@ services:
     depends_on:
       - db
     ports:
-      - 9000:8080 # nginx
-      - 9001:8090 # supervisor GUI
+      - 8080:8080 # nginx
+      - 8081:8090 # supervisor GUI
     networks:
       - overlay
     logging:
@@ -39,7 +39,6 @@ services:
 
   db:
     image: 'mariadb:10.3'
-    container_name: gitweb_db
     environment:
       - MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE
@@ -54,7 +53,6 @@ services:
 
   mailhog:
     image: mailhog/mailhog
-    container_name: gitweb_mailhog
     environment:
       - MH_SMTP_BIND_ADDR=0.0.0.0:1025
     ports:
