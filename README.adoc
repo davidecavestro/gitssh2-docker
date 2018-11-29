@@ -10,7 +10,9 @@ An alpine based docker image for gitssh2.
 
 Install https://docs.docker.com/compose/[docker compose] and run `docker-compose up`
 It will start the app, a mariadb instance and mailhog for you.
-You should see the app at http://localhost:8080 and mailhog 
+
+You should see the app at http://localhost:8080 
+(user/password: `admin/password`) and mailhog 
 at http://localhost:8025.
 
 == Config
